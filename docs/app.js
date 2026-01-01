@@ -11,11 +11,15 @@ let chunks = [];
 let recording = false;
 
 // ===== INIT =====
-setTimeout(() => {
+async function initApp() {
+  await startCamera();
+
   document.getElementById("loader").classList.add("hidden");
   document.getElementById("app").classList.remove("hidden");
-  startCamera();
-}, 1500);
+}
+
+initApp();
+
 
 // ===== CAMERA =====
 async function startCamera() {
