@@ -1,19 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Digit Detector</title>
+  <meta charset="UTF-8" />
+  <title>Realtime Digit Detector</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <div class="scan"></div>
+  <h1>INITIALIZING AI</h1>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
   <div class="card">
-    <h1>Realtime Digit Detector</h1>
+    <h2>Realtime Digit Detector</h2>
 
-    <video id="video" autoplay></video>
+    <div class="video-wrapper">
+      <video id="video" autoplay playsinline></video>
+      <div class="status">
+  <span id="recStatus" class="idle">● IDLE</span>
+</div>
+      <canvas id="overlay"></canvas>
+    </div>
 
-    <button onclick="toggleRecord()">🎥 Record</button>
+    <div class="controls">
+      <button onclick="switchCamera()">
+        <i class="fa-solid fa-camera-rotate"></i>
+      </button>
+      <button onclick="toggleRecord()">
+        <i class="fa-solid fa-circle-dot"></i>
+      </button>
+    </div>
 
-    <div id="result">-</div>
+    <div id="output">Detected: -</div>
   </div>
+</div>
 
 <script src="app.js"></script>
 </body>
