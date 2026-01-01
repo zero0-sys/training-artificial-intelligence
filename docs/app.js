@@ -11,28 +11,7 @@ let chunks = [];
 let recording = false;
 
 // ===== INIT =====
-async function initApp() {
-  await startCamera();
-
-}
-const loader = document.getElementById("loader");
-const app = document.getElementById("app");
-
-let loaderHidden = false;
-
-function hideLoader() {
-  if (loaderHidden) return;
-  loaderHidden = true;
-
-  loader.style.opacity = "0";
-  setTimeout(() => {
-    loader.classList.add("hidden");
-    app.classList.remove("hidden");
-  }, 300);
-}
-
-initApp();
-
+startCamera();
 
 // ===== CAMERA =====
 async function startCamera() {
@@ -44,33 +23,10 @@ async function startCamera() {
 
   video.srcObject = stream;
 
- video.onloadedmetadata = () => {
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-};
-
-// 🔥 1) kalau video mulai play
-video.onplaying = () => {
-  hideLoader();
-};
-
-// 🔥 2) polling ukuran video (ANDROID SAFE)
-const checkVideo = setInterval(() => {
-  if (video.videoWidth > 0 && video.videoHeight > 0) {
+  video.onloadedmetadata = () => {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    hideLoader();
-    clearInterval(checkVideo);
-  }
-}, 100);
-
-// 🔥 3) safety timeout (ANTI LOADING SELAMANYA)
-setTimeout(() => {
-  hideLoader();
-  clearInterval(checkVideo);
-}, 1200);
-
-  
+  };
 
   recorder = new MediaRecorder(stream, { mimeType: "video/mp4" });
   recorder.ondataavailable = e => chunks.push(e.data);
