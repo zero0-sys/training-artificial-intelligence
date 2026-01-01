@@ -2,42 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Realtime Digit Detector</title>
+  <title>CYBER-DIGIT AI | Realtime Detector</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+  
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- BACKGROUND ANIMATION -->
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <div class="loader-content">
+    <div class="cyber-circle"></div>
+    <div class="scan-line"></div>
+    <h1 class="glitch" data-text="INITIALIZING AI">INITIALIZING AI</h1>
+    <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+    </div>
+    <p class="loading-status">ESTABLISHING NEURAL LINK...</p>
+  </div>
+</div>
 
 <!-- APP -->
- <div id="app">
-  <div class="card">
-    <h2>Realtime Digit Detector</h2>
-
-    <div class="video-wrapper">
-      <video id="video" autoplay playsinline></video>
-      <div class="status">
-  <span id="recStatus" class="idle">● IDLE</span>
-</div>
-      <canvas id="overlay"></canvas>
+<div id="app" class="hidden">
+  <header>
+    <div class="logo">
+      <span class="cyan">CYBER</span><span class="white">DIGIT</span> <span class="version">v2.0</span>
     </div>
-
-    <div class="controls">
-      <button onclick="switchCamera()">
-        <i class="fa-solid fa-camera-rotate"></i>
-      </button>
-      <button onclick="toggleRecord()">
-        <i class="fa-solid fa-circle-dot"></i>
-      </button>
+    <div class="system-stats">
+      <div class="stat-item">
+        <span class="label">FPS:</span> <span id="fps">60</span>
+      </div>
+      <div class="stat-item">
+        <span class="label">LATENCY:</span> <span id="latency">24ms</span>
+      </div>
     </div>
+  </header>
 
-    <div id="output">Detected: -</div>
-  </div>
+  <main>
+    <div class="main-container">
+      <div class="video-section">
+        <div class="video-wrapper">
+          <div class="corner tl"></div>
+          <div class="corner tr"></div>
+          <div class="corner bl"></div>
+          <div class="corner br"></div>
+          
+          <video id="video" autoplay playsinline></video>
+          <canvas id="overlay"></canvas>
+          
+          <div class="ui-overlay">
+            <div class="rec-indicator">
+              <span id="recStatus" class="idle">● SYSTEM READY</span>
+            </div>
+            <div class="scanner-line"></div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="cyber-btn" onclick="switchCamera()" title="Switch Camera">
+            <i class="fa-solid fa-camera-rotate"></i>
+          </button>
+          <button class="cyber-btn record-btn" id="recordBtn" onclick="toggleRecord()" title="Record Session">
+            <i class="fa-solid fa-circle-dot"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="output-section">
+        <div class="output-card">
+          <div class="card-header">NEURAL OUTPUT</div>
+          <div id="output" class="output-content">SCANNING...</div>
+        </div>
+        
+        <div class="history-card">
+          <div class="card-header">SESSION LOGS</div>
+          <div id="logs" class="logs-content">
+            <div class="log-entry">System initialized...</div>
+            <div class="log-entry">Neural network loaded...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-line"></div>
+    <p>&copy; 2026 CYBER-DIGIT AI SYSTEMS. ALL RIGHTS RESERVED.</p>
+  </footer>
 </div>
 
 <script src="app.js"></script>
