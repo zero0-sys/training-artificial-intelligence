@@ -92,7 +92,12 @@ function setupRecorder() {
 
   const captureStream = captureCanvas.captureStream(30); // 30 FPS
   
-  const mimeTypes = ["video/webm;codecs=vp9", "video/webm", "video/mp4"];
+  const mimeTypes = [
+  "video/webm;codecs=vp9",
+  "video/webm;codecs=vp8",
+  "video/webm"
+];
+
   let selectedMimeType = "";
   
   for (const type of mimeTypes) {
@@ -153,6 +158,11 @@ function addLog(msg) {
 }
 
 function saveVideo() {
+  if (!chunks.length) {
+    addLog("Recording failed: empty file");
+    return;
+  }
+
   const blob = new Blob(chunks, { type: recorder.mimeType });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -161,6 +171,7 @@ function saveVideo() {
   a.click();
   addLog("Video record saved.");
 }
+
 
 // ===== SEND FRAME TO BACKEND =====
 async function sendFrame() {
