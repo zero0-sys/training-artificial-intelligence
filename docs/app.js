@@ -182,7 +182,7 @@ async function sendFrame() {
 
   const startTime = Date.now();
   try {
-    const backendUrl = window.location.hostname === 'localhost' ? 'http://localhost:8080/detect' : '/detect';
+    const backendUrl = "https://training-artificial-intelligence-production.up.railway.app/detect";
     
     const res = await fetch(backendUrl, {
       method: "POST",
