@@ -31,9 +31,14 @@ async function startCamera() {
 
   video.srcObject = stream;
 
-  video.onloadedmetadata = () => {
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+ video.onloadedmetadata = () => {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+
+  // loader langsung ilang pas kamera siap
+  document.getElementById("loader").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+
   };
 
   recorder = new MediaRecorder(stream, { mimeType: "video/mp4" });
