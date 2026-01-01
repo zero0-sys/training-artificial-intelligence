@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import base64
 import numpy as np
 import cv2
 from detector import detect_digits
 
 app = Flask(__name__)
+CORS(app)
 
 # ===== HEALTH CHECK (UNTUK RAILWAY) =====
 @app.route("/health", methods=["GET"])
